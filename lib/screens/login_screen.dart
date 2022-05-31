@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:ironaeacus/screens/main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static String id = 'login_screen';
@@ -77,9 +77,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(15)
                   ) ,
                   child: Center(
-                      child: Text('Sign in',
-                          style: TextStyle(color: Colors.white, fontSize: 20,fontWeight: FontWeight.bold)
-                      )
+                      child: MaterialButton(
+                      onPressed: () {
+                Navigator.pushNamed(context, MainScreen.id);
+                },
+                    child:Text('Sign in',
+                        style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold))
+
+                )
+
                   ),
                 ),
               ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:ironaeacus/screens/login_screen.dart';
+import 'package:ironaeacus/screens/register_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static String id = 'welcome_screen';
@@ -39,9 +41,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Center(
-                        child: Text('Sign in',
-                            style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold)
-                        )
+                        child: MaterialButton(
+                        onPressed: () {
+                      Navigator.pushNamed(context, LoginScreen.id);
+                  },
+                      child:Text('Login',
+                          style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold))
+
+                  )
                     ),
                   ),
                 ),
@@ -58,8 +65,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child:
                     Center(
-                        child: Text('Register',
-                            style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold)
+                        child: MaterialButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, RegisterScreen.id);
+                            },
+                            child:Text('Register',
+                            style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold))
+
                         )
                     ),
 
