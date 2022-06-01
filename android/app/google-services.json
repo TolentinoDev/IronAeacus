@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "53440866570",
+    "project_id": "ironaeacus",
+    "storage_bucket": "ironaeacus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53440866570:android:da16b3cc6e2e06e7ff72f3",
+        "android_client_info": {
+          "package_name": "com.example.ironaeacus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53440866570-sgv6959b45q1ih3drldlum36lpcmsmd5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBe3tqjmeVS-cj9_E0-p5ttJlwoZgo-f9M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53440866570-sgv6959b45q1ih3drldlum36lpcmsmd5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
