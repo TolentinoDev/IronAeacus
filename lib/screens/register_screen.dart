@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ironaeacus/screens/main_screen.dart';
+import 'package:intl/intl.dart';
 class RegisterScreen extends StatefulWidget {
   static String id = 'register_screen';
 
@@ -9,7 +10,27 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  DateTime date = DateTime(2022, 12, 24);
+  DateTime _selectedDate = DateTime(2022, 12, 24);
+  String startingText = 'Enter Your Birthday!' ;
+
+  void _presentDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1970),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null){
+        return;
+      }
+      setState (() {
+        _selectedDate = pickedDate;
+        startingText = DateFormat.yMd().format(_selectedDate);
+      });
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -51,24 +72,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 SizedBox(height: 10),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey[50],
-                        borderRadius: BorderRadius.circular(15)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: TextField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Birthday'
-                          )
+                      decoration: BoxDecoration(
+                          color: Colors.grey[50],
+                          borderRadius: BorderRadius.circular(15)
                       ),
-                    ),
-                  ),
+
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: MaterialButton(height: 10, minWidth: 500, onPressed: _presentDatePicker, child: Text(startingText)),
+                      ),
+                      ),
                 ),
+
                 SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
