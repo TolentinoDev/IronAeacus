@@ -6,7 +6,11 @@ import 'package:ironaeacus/screens/profile_screen.dart';
 import 'package:ironaeacus/screens/register_screen.dart';
 import 'package:ironaeacus/screens/workout_screen.dart';
 import 'package:ironaeacus/screens/workoutlog_screen.dart';
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(IronAeacus());
 }
 

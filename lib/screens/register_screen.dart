@@ -1,6 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:ironaeacus/screens/main_screen.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 class RegisterScreen extends StatefulWidget {
   static String id = 'register_screen';
 
@@ -10,6 +14,16 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final _auth = FirebaseAuth.instance;
+  late String firstname;
+  late String lastname;
+  late String email;
+  late String gender;
+  late String birthday;
+  late String height;
+  late String  weight;
+  late String password;
+
   DateTime _selectedDate = DateTime(2022, 12, 24);
   String startingText = 'Enter Your Birthday!' ;
 
@@ -63,9 +77,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
+                        textAlign: TextAlign.center,
+                        onChanged: (value){
+                          firstname = value;
+
+                        },
                           decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: 'First Name'
+                              hintText: 'First Name',
                           )
                       ),
                     ),
@@ -99,6 +118,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
+                          textAlign: TextAlign.center,
+                          onChanged: (value){
+                            lastname = value;
+
+                          },
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Last Name'
@@ -119,7 +143,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
-                          obscureText: true,
+                          textAlign: TextAlign.center,
+                          onChanged: (value){
+                            gender= value;
+
+                          },
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Gender'
@@ -139,7 +167,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
-                          obscureText: true,
+                          textAlign: TextAlign.center,
+                          onChanged: (value){
+                            height = value;
+
+                          },
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Height'
@@ -159,7 +191,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
-                          obscureText: true,
+                          textAlign: TextAlign.center,
+                          onChanged: (value){
+                            weight = value;
+
+                          },
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Weight'
@@ -179,7 +215,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
-                          obscureText: true,
+                          keyboardType: TextInputType.emailAddress,
+                          textAlign: TextAlign.center,
+                          onChanged: (value){
+                            email = value;
+
+                          },
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Email'
@@ -199,6 +240,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
+                          textAlign: TextAlign.center,
+                          onChanged: (value){
+                            password = value;
+
+                          },
                           obscureText: true,
                           decoration: InputDecoration(
                               border: InputBorder.none,
@@ -219,8 +265,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ) ,
                     child: Center(
                         child: MaterialButton(
-                            onPressed: () {
+                            onPressed: () async {
+                              try{
+                                final newUser =  await _auth.createUserWithEmailAndPassword(email: email, password: password);
+                                if (newUser != null) {
                               Navigator.pushNamed(context, MainScreen.id);
+
+                              }
+                              }
+                              catch (e){
+                                print (e);
+                              }
+
+                              
                             },
                             child:Text('Register',
                                 style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold))
