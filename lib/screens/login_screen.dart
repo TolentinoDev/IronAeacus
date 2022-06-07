@@ -45,15 +45,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: TextField(
-                      keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.emailAddress,
                         textAlign: TextAlign.center,
                         onChanged: (value){
-                          password = value;
+                          email = value;
 
                         },
                         decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Email Address'
+                            hintText: 'Email Address',
                         )
                     ),
                   ),
@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: MaterialButton(
                         onPressed: () async {
                           try{
-                            final newUser =  await _auth.createUserWithEmailAndPassword(email: email, password: password);
+                            final newUser =  await _auth.signInWithEmailAndPassword(email: email, password: password);
                             if (newUser != null) {
                               Navigator.pushNamed(context, MainScreen.id);
 

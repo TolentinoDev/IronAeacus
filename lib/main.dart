@@ -25,7 +25,6 @@ class IronAeacus extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
 
-          primarySwatch: Colors.blue,
         ),
         initialRoute: WelcomeScreen.id,
         routes: {
@@ -38,9 +37,9 @@ class IronAeacus extends StatelessWidget {
           'profile_screen': (context) =>
               ProfileScreen(),
           'workout_screen': (context) =>
-              WorkoutScreen(),
+              WorkoutScreen(selectedWorkout: 'Testing',),
           'workoutlog_screen': (context) =>
-              WorkoutScreen(),
+              WorkoutlogScreen(),
           'main_screen': (context) =>
               MainScreen(),
         }
