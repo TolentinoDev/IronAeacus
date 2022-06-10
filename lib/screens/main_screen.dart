@@ -76,8 +76,10 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[700],
-      appBar: AppBar(),
+        backgroundColor: Colors.blueGrey[700],
+      appBar: AppBar(
+
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.note),
@@ -95,12 +97,17 @@ class _MainScreenState extends State<MainScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
           children: [
-Text("Select your desired muscle group",
-        style: GoogleFonts.lato(
-          fontSize: 30
-        )
+Padding(
+  padding: const EdgeInsets.only(top: 10.0),
+  child:   Text("Select your desired muscle group",
+
+      style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)
+
+
+
+  ),
 ),
-        SizedBox(height: 25),
+        SizedBox(height: 10),
         Expanded(
           child: ListView.builder(
             itemCount: workoutType.length,
@@ -115,6 +122,13 @@ Text("Select your desired muscle group",
           }
           ),
         ),
+        Container(
+            padding: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+                color: Colors.deepOrange,
+                borderRadius: BorderRadius.circular(15)
+            ) ,
+        child:
         MaterialButton(
             onPressed: () {
               print("You've selected $selectedWorkout");
@@ -123,7 +137,8 @@ Text("Select your desired muscle group",
             },
             child:Text('Start',
                 style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold)))
-      ]
+        )
+            ]
       )
 
     );

@@ -16,7 +16,12 @@ class WorkoutTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
     child: Container(
     height: 200,
-    color: Colors.deepOrange[200],
+    //color: Colors.deepOrange[200],
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+          color: Colors.deepOrange[400],
+          borderRadius: BorderRadius.circular(15)
+      ) ,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -34,8 +39,8 @@ class WorkoutTile extends StatelessWidget {
             children: [
               Text('Reps'),
               Text('10'),
-              Text('20'),
-              Text('30'),
+              Text('10'),
+              Text('10'),
             ],
           ),
 
@@ -43,7 +48,7 @@ class WorkoutTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 18.0),
+                  padding: const EdgeInsets.only(top: 16.0),
                   child: Text('Weight'),
                 ),
             SizedBox(
@@ -58,6 +63,7 @@ class WorkoutTile extends StatelessWidget {
                         hintStyle: TextStyle(
                           color: Colors.black
                         ),
+
                         border: OutlineInputBorder()
                       ),
                     ),

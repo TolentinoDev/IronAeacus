@@ -23,24 +23,31 @@ class WorkoutType extends StatelessWidget {
     onTap: onTap,
     child: Column(
     children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            width: 100,
-            child: Text(workoutType, style:TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: isSelected ? Colors.orange: Colors.black
+      Container(
+        padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+            color: Colors.black38,
+            borderRadius: BorderRadius.circular(15)
+        ) ,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              width: 100,
+              child: Text(workoutType, style:TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: isSelected ? Colors.orange: Colors.black
+              ),
+              ),
             ),
-            ),
-          ),
 
-          CircleAvatar(
-            backgroundImage: AssetImage('lib/images/$workoutType.png'),
-            radius: 50,
-          )
-        ],
+            CircleAvatar(
+              backgroundImage: AssetImage('lib/images/$workoutType.png'),
+              radius: 50,
+            )
+          ],
+        ),
       ),
       ]
     )

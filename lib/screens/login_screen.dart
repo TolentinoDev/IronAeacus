@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Container(
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                      color: Colors.deepOrange,
+                      color: Colors.deepOrange[400],
                       borderRadius: BorderRadius.circular(15)
                   ) ,
                   child: Center(

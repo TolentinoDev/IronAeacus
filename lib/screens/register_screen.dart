@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ironaeacus/screens/main_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 class RegisterScreen extends StatefulWidget {
   static String id = 'register_screen';
 
@@ -14,12 +14,13 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   late String firstname;
   late String lastname;
   late String email;
   late String gender;
-  late String birthday;
+  //late DateTime birthday;
   late String height;
   late String  weight;
   late String password;
@@ -43,6 +44,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       });
 
     });
+    //birthday = _selectedDate;
   }
 
   @override
@@ -269,6 +271,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               try{
                                 final newUser =  await _auth.createUserWithEmailAndPassword(email: email, password: password);
                                 if (newUser != null) {
+                                  _firestore.collection('profile').add({
+                                    //'birthday': birthday,
+                                    'email': email,
+                                    'firstname':firstname,
+                                    'gender':gender,
+                                    'height':height,
+                                    'lastname': lastname,
+                                    'weight':weight
+                                  });
                               Navigator.pushNamed(context, MainScreen.id);
 
                               }
