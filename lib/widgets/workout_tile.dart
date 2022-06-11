@@ -1,13 +1,15 @@
-import 'dart:ffi';
+
 
 import 'package:flutter/material.dart';
 import 'package:ironaeacus/widgets/workout_tile.dart';
 
 class WorkoutTile extends StatelessWidget {
   final String workoutName;
+  final String weight1state;
+  final Function toggleTextboxState;
 
   WorkoutTile({
-    required this.workoutName,
+    required this.workoutName,required this.weight1state,required this.toggleTextboxState
   });
 
   @override
@@ -29,9 +31,9 @@ class WorkoutTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text('Workout'),
-              Text('$workoutName'),
-              Text('$workoutName'),
-              Text('$workoutName'),
+              Text('${workoutName}'),
+              Text('${workoutName}'),
+              Text('${workoutName}'),
             ],
           ),
           Column(
@@ -66,6 +68,9 @@ class WorkoutTile extends StatelessWidget {
 
                         border: OutlineInputBorder()
                       ),
+                onChanged: (value){
+                      toggleTextboxState(value);
+                },
                     ),
             ),
                 SizedBox(
@@ -82,6 +87,11 @@ class WorkoutTile extends StatelessWidget {
                         ),
                         border: OutlineInputBorder()
                     ),
+                    onChanged: (value){
+                      //weight2 = value;
+                     // print (weight2);
+
+                    },
                   ),
                 ),
                 SizedBox(
@@ -98,6 +108,10 @@ class WorkoutTile extends StatelessWidget {
                         ),
                         border: OutlineInputBorder()
                     ),
+                    onChanged: (value){
+                      //weight3 = value;
+                     // print (weight3);
+                    },
                   ),
                 ),
               ],
@@ -110,4 +124,5 @@ class WorkoutTile extends StatelessWidget {
     );
     }
 
-  }
+
+}

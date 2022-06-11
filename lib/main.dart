@@ -38,7 +38,7 @@ class IronAeacus extends StatelessWidget {
           'profile_screen': (context) =>
               ProfileScreen(),
           'workout_screen': (context) =>
-              WorkoutScreen(selectedWorkout: 'Testing',),
+              WorkoutScreen(selectedWorkout: 'Testing'),
           'workoutlog_screen': (context) =>
               WorkoutlogScreen(),
           'main_screen': (context) =>

@@ -3,21 +3,29 @@
 import 'package:flutter/material.dart';
 import 'package:ironaeacus/screens/workout_screen.dart';
 import 'package:ironaeacus/widgets/workout_tile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class WorkoutScreen extends StatefulWidget {
   String selectedWorkout;
+
   //List tryme = [];
   WorkoutScreen({required this.selectedWorkout});
   static String id = 'workout_screen';
+
 
   @override
   State<WorkoutScreen> createState() => _WorkoutScreenState(selectedWorkout);
 }
 
+
+
+
 List Chest = [
   [
     'Bench Press',
+    10,
+
   ],
   [
     'Incline Bench Press',
@@ -109,6 +117,19 @@ List Abs = [
 
 class _WorkoutScreenState extends State<WorkoutScreen> {
   late String selectedWorkout;
+   String weight1 = '240';
+  late int weight3;
+  late int testing;
+  final _firestore = FirebaseFirestore.instance;
+
+void textboxCallback (String weight1state){
+  setState((){
+    weight1 = weight1state;
+
+
+  });
+}
+
   List tryme = [];
 
 
@@ -145,7 +166,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
         children: [
           Expanded(
 
-            child: ListView.builder(itemCount: tryme.length, itemBuilder: (context, index){
+            child: ListView.builder(itemCount: 5, itemBuilder: (context, index){
               if (selectedWorkout == 'Chest'){
                 print(selectedWorkout);
                 tryme = Chest;
@@ -171,7 +192,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                 tryme = Abs;
                 print(tryme);
               }
-              return WorkoutTile(workoutName: tryme[index][0]);
+              return WorkoutTile(workoutName: tryme[index][0],weight1state: weight1, toggleTextboxState:textboxCallback ,);
             }),
           ),
     Container(
@@ -182,6 +203,14 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
     ) ,
         child: MaterialButton(
             onPressed: () {
+              //getWeight();
+              print('this was pressed'+ weight1 + '!');
+              _firestore.collection('workoutlog').add({
+                'workoutoftheday': selectedWorkout,
+                'Set1': tryme[0][0],
+                'Set1 reps': tryme[0][1],
+                //'Set1 weight' : weight1
+              });
 
               print("You've selected $selectedWorkout");
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => WorkoutScreen(selectedWorkout: selectedWorkout))
