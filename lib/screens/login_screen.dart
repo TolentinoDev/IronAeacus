@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ironaeacus/screens/main_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ironaeacus/screens/navigation.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -14,6 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
   late String email;
   late String password;
+  String test = 'no issues';
 
   @override
   Widget build(BuildContext context) {
@@ -96,15 +98,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Center(
                       child: MaterialButton(
                         onPressed: () async {
+                          showDialog(context: context, builder: (context) {
+                            return Center(child: CircularProgressIndicator());
+                          });
                           try{
                             final newUser =  await _auth.signInWithEmailAndPassword(email: email, password: password);
                             if (newUser != null) {
-                              Navigator.pushNamed(context, MainScreen.id);
+                              Navigator.pushNamed(context, navigation.id);
+                              //Navigator.of(context).pop();
 
                             }
                           }
                           catch (e){
                             print (e);
+                            test = e.toString();
+                            Navigator.of(context).pop();
+                            showDialog(context: context, builder: (context) {
+                              return AlertDialog(
+                                title: Text('Error'),
+                                content: Text(test),
+                              );
+                            });
+
                           }
 
 

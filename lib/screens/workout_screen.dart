@@ -1,166 +1,249 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:ironaeacus/screens/main_screen.dart';
+import 'package:ironaeacus/screens/profile_screen.dart';
 import 'package:ironaeacus/screens/workout_screen.dart';
+import 'package:ironaeacus/screens/workoutlog_screen.dart';
 import 'package:ironaeacus/widgets/workout_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
+import 'package:ironaeacus/models/workout_data.dart';
+import 'package:intl/intl.dart';
 
 
 class WorkoutScreen extends StatefulWidget {
   String selectedWorkout;
-
-  //List tryme = [];
   WorkoutScreen({required this.selectedWorkout});
   static String id = 'workout_screen';
-
 
   @override
   State<WorkoutScreen> createState() => _WorkoutScreenState(selectedWorkout);
 }
 
-
-
-
 List Chest = [
   [
     'Bench Press',
-    10,
+    '10',
+    '0',
+    '0',
+    '0'
 
   ],
   [
     'Incline Bench Press',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Push Ups',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Decline Bench Press',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Cable Flys',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
 ];
 
 List Calves = [
   [
     'Squats',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Front Squats',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Romanian Deadlift',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Leg Extensions',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Calf Raises',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
 ];
 
 List Biceps = [
   [
     'Dumbell Curl',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Lateral Pulldown',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Romanian Deadlift',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Leg Extensions',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Calf Raises',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
 ];
 
 List Shoulders = [
   [
     'Shoulder Press',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Lateral Pulldown',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Romanian Deadlift',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Leg Extensions',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Calf Raises',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
 ];
 
 List Abs = [
   [
     'Crunches',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Leg Lifts',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Decline Sit-ups',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Hanging Knee raise',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
   [
     'Bicycle Kicks',
+    '10',
+    '0',
+    '0',
+    '0'
   ],
 ];
 
 
 
 class _WorkoutScreenState extends State<WorkoutScreen> {
+  int bottomnavbarIndex = 0;
   late String selectedWorkout;
-   String weight1 = '240';
-  late int weight3;
-  late int testing;
+  String weight1 = '240';
+  String weight2 = '240';
+  String weight3 = '240';
   final _firestore = FirebaseFirestore.instance;
-
-void textboxCallback (String weight1state){
-  setState((){
-    weight1 = weight1state;
-
-
-  });
-}
-
   List tryme = [];
+  bool setlogged = false;
 
+  void toggleTextboxState(String weight1state,String weight2state,String weight3state){
+    setState(() {
+      weight1 = weight1state;
+      print(weight1state);
+      weight2 = weight2state;
+      print(weight2state);
+      weight3 = weight3state;
+      print(weight3state);
+    });
+  }
 
   _WorkoutScreenState(this.selectedWorkout);
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey[700],
-        appBar: AppBar(
-          title: Text('$selectedWorkout'),
+      appBar: AppBar(
+        title: Text('$selectedWorkout (${Provider.of<WorkoutData>(context).chest.length} workouts)'),
 
-        ),
+      ),
 
-
-    bottomNavigationBar: BottomNavigationBar(
-    items: [
-    BottomNavigationBarItem(icon: Icon(Icons.note),
-    label: 'Past Workouts',
-    ),
-    BottomNavigationBarItem(icon: Icon(Icons.home),
-    label: 'Home',
-    ),
-    BottomNavigationBarItem(icon: Icon(Icons.face),
-    label: 'Profile',
-    ),
-
-    ],
-    ),
       body: Column(
 
         children: [
@@ -192,33 +275,113 @@ void textboxCallback (String weight1state){
                 tryme = Abs;
                 print(tryme);
               }
-              return WorkoutTile(workoutName: tryme[index][0],weight1state: weight1, toggleTextboxState:textboxCallback ,);
-            }),
-          ),
-    Container(
-    padding: EdgeInsets.all(20),
-    decoration: BoxDecoration(
-    color: Colors.red,
-    borderRadius: BorderRadius.circular(15)
-    ) ,
-        child: MaterialButton(
-            onPressed: () {
-              //getWeight();
-              print('this was pressed'+ weight1 + '!');
-              _firestore.collection('workoutlog').add({
-                'workoutoftheday': selectedWorkout,
-                'Set1': tryme[0][0],
-                'Set1 reps': tryme[0][1],
-                //'Set1 weight' : weight1
-              });
 
-              print("You've selected $selectedWorkout");
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => WorkoutScreen(selectedWorkout: selectedWorkout))
+              return Column(
+                children: [
+                  WorkoutTile(
+                    workoutName: tryme[index][0],
+                    reps:tryme[index][1],
+                    weight1state: tryme[index][2],
+                    weight2state: tryme[index][3],
+                    weight3state: tryme[index][4],
+                    textboxCallback: toggleTextboxState,
+                  ),
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: Text('Set 1: ' + tryme[index][2],
+                              style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold, color: Colors.white )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: Text('Set 2: ' + tryme[index][3],
+                              style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold, color: Colors.white )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: Text('Set 3: ' + tryme[index][4], style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold, color: Colors.white )),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+              child: DecoratedBox
+              (decoration: BoxDecoration(color: Colors.red,borderRadius: BorderRadius.circular(5)),
+                      child: MaterialButton(
+                        onPressed: () {
+                          setState ((){
+                            print('logging set');
+                            tryme[index][2] = weight1;
+                            print('weight 1' + weight1);
+                            tryme[index][3] = weight2;
+                            print('weight 2' + weight2);
+                            tryme[index][4] = weight3;
+                            print('weight 3' + weight3);
+                          });
+
+                        },
+                        child:Text('Log Set',
+                            style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold, color: Colors.white )),
+                      ),
+                    )),
+                  )
+                ],
               );
-            },
-            child:Text('Finish Workout',
-                style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold)))
-    )
+
+            }
+
+            ),
+
+          ),
+          FloatingActionButton.extended(onPressed:() {
+
+
+            _firestore.collection('workoutlogs').add({
+              'workoutoftheday': selectedWorkout,
+              'day': DateFormat('MEd').format(DateTime.now()),
+              'Set1': tryme[0][0],
+              'Set1 reps': tryme[0][1],
+              'Set1 weight1': tryme[0][2],
+              'Set1 weight2': tryme[0][3],
+              'Set1 weight3': tryme[0][4],
+
+
+              'Set2': tryme[1][0],
+              'Set2 reps': tryme[1][1],
+              'Set2 weight1': tryme[1][2],
+              'Set2 weight2': tryme[1][3],
+              'Set2 weight3': tryme[1][4],
+
+              'Set3': tryme[2][0],
+              'Set3 reps': tryme[2][1],
+              'Set3 weight1': tryme[2][2],
+              'Set3 weight2': tryme[2][3],
+              'Set3 weight3': tryme[2][4],
+
+              'Set4': tryme[3][0],
+              'Set4 reps': tryme[3][1],
+              'Set4 weight1': tryme[3][2],
+              'Set4 weight2': tryme[3][3],
+              'Set4 weight3': tryme[3][4],
+
+              'Set5': tryme[4][0],
+              'Set5 reps': tryme[4][1],
+              'Set5 weight1': tryme[4][2],
+              'Set5 weight2': tryme[4][3],
+              'Set5 weight3': tryme[4][4],
+
+            });
+          }, label: Text("Log workout"),
+            icon: Icon(Icons.celebration),
+
+
+          )
+
         ],
       ),
     );

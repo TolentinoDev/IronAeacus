@@ -43,6 +43,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: Center(
                         child: MaterialButton(
                         onPressed: () {
+                          showDialog(context: context, builder: (context) {
+                            return Center(child: CircularProgressIndicator());
+                          });
                       Navigator.pushNamed(context, LoginScreen.id);
                   },
                       child:Text('Login',

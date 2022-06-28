@@ -77,35 +77,11 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.blueGrey[700],
-      appBar: AppBar(
-
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.note),
-          label: 'Past Workouts',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.face),
-            label: 'Profile',
-          ),
-
-        ],
-      ) ,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
           children: [
 Padding(
   padding: const EdgeInsets.only(top: 10.0),
-  child:   Text("Select your desired muscle group",
-
-      style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)
-
-
-
-  ),
 ),
         SizedBox(height: 10),
         Expanded(

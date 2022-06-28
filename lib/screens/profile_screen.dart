@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ironaeacus/screens/main_screen.dart';
+import 'package:ironaeacus/screens/workoutlog_screen.dart';
 
 
 class ProfileScreen extends StatefulWidget {
@@ -8,8 +10,11 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+    );
   }
 }
