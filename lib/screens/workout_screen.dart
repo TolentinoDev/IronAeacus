@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:ironaeacus/models/workout_data.dart';
 import 'package:intl/intl.dart';
+import 'package:ironaeacus/screens/navigation.dart';
 
 
 class WorkoutScreen extends StatefulWidget {
@@ -221,6 +222,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   final _firestore = FirebaseFirestore.instance;
   List tryme = [];
   bool setlogged = false;
+  String test = 'no issues';
 
   void toggleTextboxState(String weight1state,String weight2state,String weight3state){
     setState(() {
@@ -293,16 +295,16 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                         Padding(
                           padding: const EdgeInsets.all(2.0),
                           child: Text('Set 1: ' + tryme[index][2],
-                              style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold, color: Colors.white )),
+                              style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold, color: Colors.white )),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(2.0),
                           child: Text('Set 2: ' + tryme[index][3],
-                              style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold, color: Colors.white )),
+                              style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold, color: Colors.white )),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(2.0),
-                          child: Text('Set 3: ' + tryme[index][4], style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold, color: Colors.white )),
+                          child: Text('Set 3: ' + tryme[index][4], style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold, color: Colors.white )),
                         ),
                       ],
                     ),
@@ -339,44 +341,65 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
 
           ),
           FloatingActionButton.extended(onPressed:() {
-
-
-            _firestore.collection('workoutlogs').add({
-              'workoutoftheday': selectedWorkout,
-              'day': DateFormat('MEd').format(DateTime.now()),
-              'Set1': tryme[0][0],
-              'Set1 reps': tryme[0][1],
-              'Set1 weight1': tryme[0][2],
-              'Set1 weight2': tryme[0][3],
-              'Set1 weight3': tryme[0][4],
-
-
-              'Set2': tryme[1][0],
-              'Set2 reps': tryme[1][1],
-              'Set2 weight1': tryme[1][2],
-              'Set2 weight2': tryme[1][3],
-              'Set2 weight3': tryme[1][4],
-
-              'Set3': tryme[2][0],
-              'Set3 reps': tryme[2][1],
-              'Set3 weight1': tryme[2][2],
-              'Set3 weight2': tryme[2][3],
-              'Set3 weight3': tryme[2][4],
-
-              'Set4': tryme[3][0],
-              'Set4 reps': tryme[3][1],
-              'Set4 weight1': tryme[3][2],
-              'Set4 weight2': tryme[3][3],
-              'Set4 weight3': tryme[3][4],
-
-              'Set5': tryme[4][0],
-              'Set5 reps': tryme[4][1],
-              'Set5 weight1': tryme[4][2],
-              'Set5 weight2': tryme[4][3],
-              'Set5 weight3': tryme[4][4],
-
+            showDialog(context: context, builder: (context) {
+              return Center(child: CircularProgressIndicator());
             });
-          }, label: Text("Log workout"),
+            try {
+    _firestore.collection('workoutlogs').add({
+    'workoutoftheday': selectedWorkout,
+    'day': DateFormat('MEd').format(DateTime.now()),
+    'Set1': tryme[0][0],
+    'Set1 reps': tryme[0][1],
+    'Set1 weight1': tryme[0][2],
+    'Set1 weight2': tryme[0][3],
+    'Set1 weight3': tryme[0][4],
+
+
+    'Set2': tryme[1][0],
+    'Set2 reps': tryme[1][1],
+    'Set2 weight1': tryme[1][2],
+    'Set2 weight2': tryme[1][3],
+    'Set2 weight3': tryme[1][4],
+
+    'Set3': tryme[2][0],
+    'Set3 reps': tryme[2][1],
+    'Set3 weight1': tryme[2][2],
+    'Set3 weight2': tryme[2][3],
+    'Set3 weight3': tryme[2][4],
+
+    'Set4': tryme[3][0],
+    'Set4 reps': tryme[3][1],
+    'Set4 weight1': tryme[3][2],
+    'Set4 weight2': tryme[3][3],
+    'Set4 weight3': tryme[3][4],
+
+    'Set5': tryme[4][0],
+    'Set5 reps': tryme[4][1],
+    'Set5 weight1': tryme[4][2],
+    'Set5 weight2': tryme[4][3],
+    'Set5 weight3': tryme[4][4],
+
+    });
+
+    Navigator.pushNamed(context, navigation.id);
+            }
+
+            catch(e){
+              print (e);
+              test = e.toString();
+              Navigator.of(context).pop();
+              showDialog(context: context, builder: (context) {
+                return AlertDialog(
+                  title: Text('Error'),
+                  content: Text(test),
+                );
+              });
+
+            }
+
+    },
+
+            label: Text("Log workout"),
             icon: Icon(Icons.celebration),
 
 

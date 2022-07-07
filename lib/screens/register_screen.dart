@@ -1,10 +1,10 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:ironaeacus/screens/main_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ironaeacus/screens/navigation.dart';
 class RegisterScreen extends StatefulWidget {
   static String id = 'register_screen';
 
@@ -21,9 +21,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late String email;
   late String gender;
   //late DateTime birthday;
-  late String height;
+  //late String height;
   late String  weight;
   late String password;
+  String test = 'no issues';
 
   DateTime _selectedDate = DateTime(2022, 12, 24);
   String startingText = 'Enter Your Birthday!' ;
@@ -171,30 +172,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       child: TextField(
                           textAlign: TextAlign.center,
                           onChanged: (value){
-                            height = value;
-
-                          },
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Height'
-                          )
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey[50],
-                        borderRadius: BorderRadius.circular(15)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: TextField(
-                          textAlign: TextAlign.center,
-                          onChanged: (value){
                             weight = value;
 
                           },
@@ -276,17 +253,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     'email': email,
                                     'firstname':firstname,
                                     'gender':gender,
-                                    'height':height,
                                     'lastname': lastname,
                                     'weight':weight
                                   });
-                              Navigator.pushNamed(context, MainScreen.id);
+                              Navigator.pushNamed(context, navigation.id);
 
                               }
                               }
                               catch (e){
-                                print (e);
-                              }
+                                test = e.toString();
+                                showDialog(context: context, builder: (context) {
+                                  return AlertDialog(
+                                    title: Text('Error'),
+                                    content: Text(test),
+                                  );
+                                });
+                              };
 
                               
                             },
