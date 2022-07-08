@@ -21,6 +21,8 @@ class _WorkoutlogScreenState extends State<WorkoutlogScreen> {
   final _auth = FirebaseAuth.instance;
   late String workoutoftheday;
   late String day;
+  FirebaseAuth auth = FirebaseAuth.instance;
+  var user = FirebaseAuth.instance.currentUser!.email;
 
   void nav(int index) {
     setState((){
@@ -37,7 +39,7 @@ class _WorkoutlogScreenState extends State<WorkoutlogScreen> {
   ];
 
   void workoutStream() async {
-    await for (var snapshot in firestore.collection('workoutlogs').snapshots()){
+    await for (var snapshot in firestore.collection('profile/$user/workoutlogs').snapshots()){
       for (var workoutlog in snapshot.docs){
         print(workoutlog.id);
       }
@@ -54,10 +56,10 @@ class _WorkoutlogScreenState extends State<WorkoutlogScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             StreamBuilder <QuerySnapshot>(
-              stream: firestore.collection('workoutlogs').snapshots(),
+              stream: firestore.collection('profile/$user/workoutlogs').snapshots(),
               builder: (context, snapshot) {
     if (snapshot.hasData) {
-    final workoutlogs = snapshot.data!.docs;
+      final workoutlogs = snapshot.data!.docs;
 
     List<WorkoutlogView> workoutlogWidgets = [];
 

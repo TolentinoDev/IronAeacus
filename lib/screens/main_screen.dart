@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ironaeacus/screens/workout_screen.dart';
 import 'package:ironaeacus/widgets/workout_tile.dart';
 import 'package:ironaeacus/widgets/workout_type.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class MainScreen extends StatefulWidget {
@@ -16,8 +17,12 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final _auth = FirebaseAuth.instance;
+  final firestore = FirebaseFirestore.instance;
   late User loggedInUser;
   late String selectedWorkout;
+  final user = FirebaseAuth.instance.currentUser!;
+  //var db = firestore.collection("profile");
+
 
   final List workoutType = [
     [
@@ -80,6 +85,7 @@ class _MainScreenState extends State<MainScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
 Padding(
   padding: const EdgeInsets.only(top: 10.0),
 ),

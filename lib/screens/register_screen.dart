@@ -5,9 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ironaeacus/screens/navigation.dart';
+import 'package:ironaeacus/screens/workout_screen.dart';
+
 class RegisterScreen extends StatefulWidget {
   static String id = 'register_screen';
-
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -19,12 +20,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late String firstname;
   late String lastname;
   late String email;
-  late String gender;
+  String gender = "male";
   //late DateTime birthday;
   //late String height;
   late String  weight;
   late String password;
   String test = 'no issues';
+  String uid = '1';
+
 
   DateTime _selectedDate = DateTime(2022, 12, 24);
   String startingText = 'Enter Your Birthday!' ;
@@ -136,28 +139,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 SizedBox(height: 10),
 
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey[50],
-                        borderRadius: BorderRadius.circular(15)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: TextField(
-                          textAlign: TextAlign.center,
-                          onChanged: (value){
-                            gender= value;
 
-                          },
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Gender'
-                          )
-                      ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Male"),Radio(value: "Male",
+                    groupValue: gender,
+                    onChanged: (value) {
+                      setState(() {
+                        gender = value.toString();
+                      });
+                    },
                     ),
-                  ),
+                    Text("Female"),Radio(value: "Female",
+                      groupValue: gender,
+                      onChanged: (value) {
+                        setState(() {
+                          gender = value.toString();
+                        });
+                      },
+                    ),
+                    Text("Other"),Radio(value: "Other",
+                      groupValue: gender,
+                      onChanged: (value) {
+                        setState(() {
+                          gender = value.toString();
+                        });
+                      },
+                    )
+                  ],
                 ),
                 SizedBox(height: 10),
                 Padding(
@@ -248,17 +258,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               try{
                                 final newUser =  await _auth.createUserWithEmailAndPassword(email: email, password: password);
                                 if (newUser != null) {
-                                  _firestore.collection('profile').add({
-                                    //'birthday': birthday,
+                                  final test = FirebaseFirestore.instance.collection('profile').doc(email);
+                                  final json = {
                                     'email': email,
                                     'firstname':firstname,
                                     'gender':gender,
                                     'lastname': lastname,
                                     'weight':weight
-                                  });
-                              Navigator.pushNamed(context, navigation.id);
+                                  };
+                                  await test.set(json);
 
-                              }
+                                  }
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => navigation(),
+                                  ),);
                               }
                               catch (e){
                                 test = e.toString();

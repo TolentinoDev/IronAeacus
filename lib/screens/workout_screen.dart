@@ -5,6 +5,7 @@ import 'package:ironaeacus/screens/workout_screen.dart';
 import 'package:ironaeacus/screens/workoutlog_screen.dart';
 import 'package:ironaeacus/widgets/workout_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:ironaeacus/models/workout_data.dart';
 import 'package:intl/intl.dart';
@@ -223,6 +224,11 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   List tryme = [];
   bool setlogged = false;
   String test = 'no issues';
+  FirebaseAuth auth = FirebaseAuth.instance;
+  var user = FirebaseAuth.instance.currentUser!.email;
+
+
+
 
   void toggleTextboxState(String weight1state,String weight2state,String weight3state){
     setState(() {
@@ -345,7 +351,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
               return Center(child: CircularProgressIndicator());
             });
             try {
-    _firestore.collection('workoutlogs').add({
+    _firestore.collection('profile/$user/workoutlogs').add({
     'workoutoftheday': selectedWorkout,
     'day': DateFormat('MEd').format(DateTime.now()),
     'Set1': tryme[0][0],
