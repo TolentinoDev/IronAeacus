@@ -222,6 +222,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   String weight3 = '240';
   final _firestore = FirebaseFirestore.instance;
   List tryme = [];
+  List empty = [];
   bool setlogged = false;
   String test = 'no issues';
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -386,6 +387,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
     'Set5 weight3': tryme[4][4],
 
     });
+    tryme = empty;
 
     Navigator.pushNamed(context, navigation.id);
             }

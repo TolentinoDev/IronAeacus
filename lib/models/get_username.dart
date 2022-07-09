@@ -87,10 +87,8 @@ class GetGender extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data =
           snapshot.data!.data() as Map<String, dynamic>;
-          return CircleAvatar(
-              backgroundImage: AssetImage('lib/images/male.png'),
-              radius: 100,
-          );
+          var test =  Text('${data['gender']}',style: TextStyle(fontSize: 30)) as Widget;
+          return test;
         }
 
         return Text ('loading');
