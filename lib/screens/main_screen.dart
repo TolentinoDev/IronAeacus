@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ironaeacus/screens/workout_screen.dart';
-import 'package:ironaeacus/widgets/workout_tile.dart';
 import 'package:ironaeacus/widgets/workout_type.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -21,7 +19,6 @@ class _MainScreenState extends State<MainScreen> {
   late User loggedInUser;
   late String selectedWorkout;
   final user = FirebaseAuth.instance.currentUser!;
-  //var db = firestore.collection("profile");
 
 
   final List workoutType = [
@@ -63,20 +60,8 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    getCurrentUser();
   }
 
-  void getCurrentUser () async {
-    final user = _auth.currentUser;
-    if (user != null) {
-      loggedInUser = user;
-      print(loggedInUser.email);
-
-    }
-
-
-
-  }
 
   @override
   Widget build(BuildContext context) {

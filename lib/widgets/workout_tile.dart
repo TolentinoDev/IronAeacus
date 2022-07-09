@@ -1,7 +1,4 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:ironaeacus/widgets/workout_tile.dart';
 
 class WorkoutTile extends StatelessWidget{
 
@@ -273,17 +270,6 @@ class WorkoutTile extends StatelessWidget{
 
 
     ),
-   /*             MaterialButton(
-                    onPressed: () {
-                      weight1state = entryText;
-                      weight2state = entryText2;
-                      weight3state = entryText3;
-                      textboxCallback(weight1state,weight2state,weight3state);
-
-                    },
-
-                    child:Text('Log Set',
-                        style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold)))*/
           ],
         ));
     }

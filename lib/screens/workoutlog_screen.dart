@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ironaeacus/screens/main_screen.dart';
-import 'package:ironaeacus/screens/profile_screen.dart';
 import 'package:ironaeacus/screens/workoutdetails_screen.dart';
 
 
@@ -16,27 +14,12 @@ class WorkoutlogScreen extends StatefulWidget {
 
 
 class _WorkoutlogScreenState extends State<WorkoutlogScreen> {
-  int bottomnavbarIndex = 0;
   final firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   late String workoutoftheday;
   late String day;
   FirebaseAuth auth = FirebaseAuth.instance;
   var user = FirebaseAuth.instance.currentUser!.email;
-
-  void nav(int index) {
-    setState((){
-      bottomnavbarIndex = index;
-      print(pages[index]);
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => pages[index])
-      );
-    });
-  }
-  final List pages = [
-    WorkoutlogScreen(),
-    MainScreen(),
-    ProfileScreen(),
-  ];
 
   void workoutStream() async {
     await for (var snapshot in firestore.collection('profile/$user/workoutlogs').snapshots()){
@@ -58,7 +41,7 @@ class _WorkoutlogScreenState extends State<WorkoutlogScreen> {
             StreamBuilder <QuerySnapshot>(
               stream: firestore.collection('profile/$user/workoutlogs').snapshots(),
               builder: (context, snapshot) {
-    if (snapshot.hasData) {
+    if (snapshot.hasData)  {
       final workoutlogs = snapshot.data!.docs;
 
     List<WorkoutlogView> workoutlogWidgets = [];

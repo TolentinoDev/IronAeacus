@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ironaeacus/screens/main_screen.dart';
-import 'package:ironaeacus/screens/navigation.dart';
 import 'package:ironaeacus/screens/welcome_screen.dart';
-import 'package:ironaeacus/screens/workoutlog_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ironaeacus/models/get_username.dart';
-import 'package:ironaeacus/screens/login_screen.dart';
 class ProfileScreen extends StatelessWidget {
 
   static String id = 'profile_screen';
@@ -14,7 +9,6 @@ class ProfileScreen extends StatelessWidget {
   final firestore = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser!.email;
   final docRef = FirebaseFirestore.instance.collection("profile").doc('user');
-  //var user = FirebaseAuth.instance.currentUser.;
   String firstname = ' ';
   String lastname = ' ';
   String weight = ' ';
@@ -70,7 +64,14 @@ class ProfileScreen extends StatelessWidget {
      ),
 
               ),
-              MaterialButton(
+    Container(
+    padding: EdgeInsets.all(20),
+    decoration: BoxDecoration(
+    color: Colors.deepOrange[400],
+    borderRadius: BorderRadius.circular(15)
+    ) ,
+    child: Center(
+              child: MaterialButton(
                   onPressed: () async {
                     showDialog(context: context, builder: (context) {
                       return Center(child: CircularProgressIndicator());
@@ -85,10 +86,108 @@ class ProfileScreen extends StatelessWidget {
 
               )
 
+    ),
+    ),
+
               ]
         )
           );
 
 
+  }
+}
+
+
+class GetFirstName extends StatelessWidget {
+
+  final firestore = FirebaseFirestore.instance;
+  var user = FirebaseAuth.instance.currentUser!.email;
+
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference users = FirebaseFirestore.instance.collection('profile');
+
+    return FutureBuilder<DocumentSnapshot>(
+      future: users.doc(user).get(),
+      builder: ((context, snapshot){
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data =
+          snapshot.data!.data() as Map<String, dynamic>;
+          return Text('${data['firstname']}',style: TextStyle(fontSize: 30));
+        }
+        return Text ('loading');
+      }),
+    );
+  }
+}
+
+class GetLastName extends StatelessWidget {
+
+  final firestore = FirebaseFirestore.instance;
+  var user = FirebaseAuth.instance.currentUser!.email;
+
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference users = FirebaseFirestore.instance.collection('profile');
+
+    return FutureBuilder<DocumentSnapshot>(
+      future: users.doc(user).get(),
+      builder: ((context, snapshot){
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data =
+          snapshot.data!.data() as Map<String, dynamic>;
+          return Text('${data['lastname']}',style: TextStyle(fontSize: 30));
+        }
+        return Text ('loading');
+      }),
+    );
+  }
+}
+
+class GetWeight extends StatelessWidget {
+
+  final firestore = FirebaseFirestore.instance;
+  var user = FirebaseAuth.instance.currentUser!.email;
+
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference users = FirebaseFirestore.instance.collection('profile');
+
+    return FutureBuilder<DocumentSnapshot>(
+      future: users.doc(user).get(),
+      builder: ((context, snapshot){
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data =
+          snapshot.data!.data() as Map<String, dynamic>;
+          return Text('${data['weight']}',style: TextStyle(fontSize: 30));
+        }
+        return Text ('loading');
+      }),
+    );
+  }
+}
+
+class GetGender extends StatelessWidget {
+
+  final firestore = FirebaseFirestore.instance;
+  var user = FirebaseAuth.instance.currentUser!.email;
+
+  @override
+  Widget build(BuildContext context) {
+    CollectionReference users = FirebaseFirestore.instance.collection('profile');
+
+    return FutureBuilder<DocumentSnapshot>(
+      future: users.doc(user).get(),
+      builder: ((context, snapshot){
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data =
+          snapshot.data!.data() as Map<String, dynamic>;
+          var test =  Text('${data['gender']}',style: TextStyle(fontSize: 30)) as Widget;
+          return test;
+        }
+
+        return Text ('loading');
+      }),
+    );
   }
 }

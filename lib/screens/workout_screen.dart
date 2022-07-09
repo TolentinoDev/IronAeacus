@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ironaeacus/screens/main_screen.dart';
-import 'package:ironaeacus/screens/profile_screen.dart';
-import 'package:ironaeacus/screens/workout_screen.dart';
-import 'package:ironaeacus/screens/workoutlog_screen.dart';
 import 'package:ironaeacus/widgets/workout_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:provider/provider.dart';
-import 'package:ironaeacus/models/workout_data.dart';
 import 'package:intl/intl.dart';
 import 'package:ironaeacus/screens/navigation.dart';
 
@@ -249,7 +243,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
     return Scaffold(
       backgroundColor: Colors.blueGrey[700],
       appBar: AppBar(
-        title: Text('$selectedWorkout (${Provider.of<WorkoutData>(context).chest.length} workouts)'),
+        title: Text('$selectedWorkout workout'),
 
       ),
 
@@ -349,7 +343,10 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
           ),
           FloatingActionButton.extended(onPressed:() {
             showDialog(context: context, builder: (context) {
-              return Center(child: CircularProgressIndicator());
+              return AlertDialog(
+                title: Text('Success'),
+                content: Text("Workout logged"),
+              );;
             });
             try {
     _firestore.collection('profile/$user/workoutlogs').add({

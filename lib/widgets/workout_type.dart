@@ -1,11 +1,8 @@
-
 import 'package:flutter/material.dart';
-import 'package:ironaeacus/widgets/workout_tile.dart';
 
 class WorkoutType extends StatelessWidget {
   final String workoutType;
   final bool isSelected;
-
   late final VoidCallback onTap;
 
   WorkoutType({

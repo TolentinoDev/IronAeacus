@@ -7,9 +7,6 @@ import 'package:ironaeacus/screens/register_screen.dart';
 import 'package:ironaeacus/screens/workout_screen.dart';
 import 'package:ironaeacus/screens/workoutlog_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:ironaeacus/models/workout.dart';
-import 'package:provider/provider.dart';
-import 'package:ironaeacus/models/workout_data.dart';
 import 'package:ironaeacus/screens/navigation.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,9 +20,7 @@ class IronAeacus extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => WorkoutData(),
-      child: MaterialApp(
+    return MaterialApp(
 
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
@@ -51,7 +46,6 @@ class IronAeacus extends StatelessWidget {
             'navigation_screen': (context) =>
                 navigation(),
           }
-      ),
     );
   }
 }

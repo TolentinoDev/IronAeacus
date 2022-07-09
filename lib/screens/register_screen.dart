@@ -1,11 +1,8 @@
-
 import 'package:flutter/material.dart';
-import 'package:ironaeacus/screens/main_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ironaeacus/screens/navigation.dart';
-import 'package:ironaeacus/screens/workout_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   static String id = 'register_screen';
@@ -21,8 +18,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late String lastname;
   late String email;
   String gender = "male";
-  //late DateTime birthday;
-  //late String height;
   late String  weight;
   late String password;
   String test = 'no issues';
@@ -48,7 +43,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       });
 
     });
-    //birthday = _selectedDate;
   }
 
   @override
@@ -143,7 +137,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Male"),Radio(value: "Male",
+                    Text("Male",
+                        style: TextStyle(fontSize: 22,color: Colors.white, fontWeight: FontWeight.bold)),Radio(value: "Male",
                     groupValue: gender,
                     onChanged: (value) {
                       setState(() {
@@ -151,7 +146,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       });
                     },
                     ),
-                    Text("Female"),Radio(value: "Female",
+                    Text("Female",
+                        style: TextStyle(fontSize: 22,color: Colors.white, fontWeight: FontWeight.bold)),Radio(value: "Female",
                       groupValue: gender,
                       onChanged: (value) {
                         setState(() {
@@ -159,7 +155,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         });
                       },
                     ),
-                    Text("Other"),Radio(value: "Other",
+                    Text("Other",
+                        style: TextStyle(fontSize: 22,color: Colors.white, fontWeight: FontWeight.bold)),Radio(value: "Other",
                       groupValue: gender,
                       onChanged: (value) {
                         setState(() {
@@ -255,6 +252,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Center(
                         child: MaterialButton(
                             onPressed: () async {
+                              showDialog(context: context, builder: (context) {
+                                return Center(child: CircularProgressIndicator());
+                              });
                               try{
                                 final newUser =  await _auth.createUserWithEmailAndPassword(email: email, password: password);
                                 if (newUser != null) {
