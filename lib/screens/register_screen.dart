@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ironaeacus/screens/navigation.dart';
 
+// Yu, D. A. (2021). The complete 2021 flutter development bootcamp with Dart. Udemy. Retrieved July 27, 2022, from https://www.udemy.com/share/101WB63@KiWgQPgFpwJTbiSsyAyZd8vEuF1ut-iPL88neXwt84jf7QBpYiV-sgGSzvAkV3x-FQ==/
 class RegisterScreen extends StatefulWidget {
   static String id = 'register_screen';
 

@@ -21,6 +21,7 @@ class _WorkoutlogScreenState extends State<WorkoutlogScreen> {
   FirebaseAuth auth = FirebaseAuth.instance;
   var user = FirebaseAuth.instance.currentUser!.email;
 
+  // Tolentino, Ryan (2021). Aloha Illio. Unpublished, Florida Institute of Technology
   void workoutStream() async {
     await for (var snapshot in firestore.collection('profile/$user/workoutlogs').snapshots()){
       for (var workoutlog in snapshot.docs){

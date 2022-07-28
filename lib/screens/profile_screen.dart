@@ -129,7 +129,7 @@ class GetLastName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('profile');
-
+// Firebase. (2022). Cloud firestore: Flutterfire. FlutterFire Blog RSS. Retrieved July 27, 2022, from https://firebase.flutter.dev/docs/firestore/usage/
     return FutureBuilder<DocumentSnapshot>(
       future: users.doc(user).get(),
       builder: ((context, snapshot){

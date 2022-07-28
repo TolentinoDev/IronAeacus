@@ -3,7 +3,7 @@ import 'package:ironaeacus/screens/main_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ironaeacus/screens/navigation.dart';
 
-
+// Tolentino, Ryan (2021). Aloha Illio. Unpublished, Florida Institute of Technology,
 class LoginScreen extends StatefulWidget {
   static String id = 'login_screen';
 
@@ -32,7 +32,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   Icons.sports_gymnastics,
                   size: 50
               ),
-              SizedBox(height: 10),
               Text("Iron Aeacus!",
                   style: TextStyle(fontSize: 22,color: Colors.white, fontWeight: FontWeight.bold)),
               Text("A free beginner workout application!",

@@ -47,48 +47,49 @@ class WorkoutDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text ("$day's $workoutoftheday Workout"),
       ),
-          body: SingleChildScrollView(
+          body: Center(
+            child: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(20),
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15)
-          ) ,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15)
+            ) ,
+            child: Column(
 
-            children: [
-              Text("Workout Summary"),
-                        Text("$workoutoftheday"),
-                        Text("$Set1"),
-                        Text("$Set1reps"),
-                        Text("$Set1weight1"),
-                        Text("$Set1weight2"),
-                        Text("$Set1weight3"),
-                        Text("$Set2"),
-                        Text("$Set2reps"),
-                        Text("$Set2weight1"),
-                        Text("$Set2weight2"),
-                        Text("$Set2weight3"),
-                        Text("$Set3"),
-                        Text("$Set3reps"),
-                        Text("$Set3weight1"),
-                        Text("$Set3weight2"),
-                        Text("$Set3weight3"),
-                        Text("$Set4"),
-                        Text("$Set4reps"),
-                        Text("$Set4weight1"),
-                        Text("$Set4weight2"),
-                        Text("$Set4weight3"),
-                        Text("$Set5"),
-                        Text("$Set5reps"),
-                        Text("$Set5weight1"),
-                        Text("$Set5weight2"),
-                        Text("$Set5weight3"),
+              children: [
+                Text("Workout Summary"),
+                          Text("$workoutoftheday"),
+                          Text("$Set1"),
+                          Text("$Set1reps"),
+                          Text("$Set1weight1"),
+                          Text("$Set1weight2"),
+                          Text("$Set1weight3"),
+                          Text("$Set2"),
+                          Text("$Set2reps"),
+                          Text("$Set2weight1"),
+                          Text("$Set2weight2"),
+                          Text("$Set2weight3"),
+                          Text("$Set3"),
+                          Text("$Set3reps"),
+                          Text("$Set3weight1"),
+                          Text("$Set3weight2"),
+                          Text("$Set3weight3"),
+                          Text("$Set4"),
+                          Text("$Set4reps"),
+                          Text("$Set4weight1"),
+                          Text("$Set4weight2"),
+                          Text("$Set4weight3"),
+                          Text("$Set5"),
+                          Text("$Set5reps"),
+                          Text("$Set5weight1"),
+                          Text("$Set5weight2"),
+                          Text("$Set5weight3"),
       ],
     ),
         )
-    )
+    ),
+          )
     );
   }
 }
